@@ -1,6 +1,5 @@
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:image_picker/image_picker.dart';
 
 class interactivePage extends StatefulWidget {
@@ -70,7 +69,7 @@ class _interactivePage extends State<interactivePage> {
             builder: ((builder) => bottomSheetpdc()),
           );
         },
-        child: Icon(
+        child: const Icon(
           Icons.camera_alt,
           color: Colors.teal,
           size: 35.0,
@@ -85,7 +84,7 @@ class _interactivePage extends State<interactivePage> {
             builder: ((builder) => bottomSheetpdp()),
           );
         },
-        child: Icon(
+        child: const Icon(
           Icons.camera_alt,
           color: Colors.black,
           size: 28.0,
@@ -97,33 +96,33 @@ class _interactivePage extends State<interactivePage> {
     return Container(
       height: 200.0,
       width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 50,
         vertical: 50,
       ),
       child: Column(children: <Widget>[
-        Text(
+        const Text(
           "Choisir photo de Couverture",
           style: TextStyle(
             fontSize: 20.0,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 50,
         ),
         Column(
           children: [
             ElevatedButton.icon(
                 onPressed: () {},
-                icon: Icon(Icons.camera),
-                label: Text(
+                icon: const Icon(Icons.camera),
+                label: const Text(
                   "Prendre une photo",
                   style: TextStyle(color: Colors.black),
                 )),
             ElevatedButton.icon(
                 onPressed: () {},
-                icon: Icon(Icons.image),
-                label: Text(
+                icon: const Icon(Icons.image),
+                label: const Text(
                   "Importer une photo",
                   style: TextStyle(color: Colors.black),
                 )),
@@ -138,32 +137,34 @@ class _interactivePage extends State<interactivePage> {
     return Container(
       height: 200.0,
       width: MediaQuery.of(context).size.width,
-      margin: EdgeInsets.symmetric(
+      margin: const EdgeInsets.symmetric(
         horizontal: 50,
         vertical: 50,
       ),
       child: Column(children: <Widget>[
-        Text(
+        const Text(
           "Choisir photo de profil",
           style: TextStyle(
             fontSize: 20.0,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 50,
         ),
         Column(
           children: [
             ElevatedButton.icon(
                 onPressed: () {
-                  cheminimage();
+                  cheminimage(ImageSource.camera);
                 },
-                icon: Icon(Icons.camera),
-                label: Text("Camera")),
+                icon: const Icon(Icons.camera),
+                label: const Text("Camera")),
             ElevatedButton.icon(
-                onPressed: () {},
-                icon: Icon(Icons.image),
-                label: Text("Gallery")),
+                onPressed: () {
+                  cheminimage(ImageSource.gallery);
+                },
+                icon: const Icon(Icons.image),
+                label: const Text("Gallery")),
           ],
         )
       ]),
@@ -204,14 +205,14 @@ class _interactivePage extends State<interactivePage> {
 
   //ImagePicker
   //Maka ilay image anaty gallery
-  Future<XFile?> pickImage() async {
+  Future<XFile?> pickImage(ImageSource source) async {
     final picker = ImagePicker();
-    return await picker.pickImage(source: ImageSource.gallery);
+    return await picker.pickImage(source: source);
   }
 
   //Maka ny chemin an'ilay image
-  Future<void> cheminimage() async {
-    final PickedFile = await pickImage();
+  Future<void> cheminimage(ImageSource source) async {
+    final PickedFile = await pickImage(source);
     if (PickedFile != null) {
       setState(() {
         path = PickedFile.path;
@@ -259,38 +260,38 @@ class _interactivePage extends State<interactivePage> {
               alignment: Alignment.centerLeft,
               children: [
                 Container(
+                  margin: const EdgeInsets.only(bottom: 70),
                   child: photocouverture(),
-                  margin: EdgeInsets.only(bottom: 70),
                 ),
                 Container(
+                  margin: const EdgeInsets.all(160),
                   child: camerapdc(),
-                  margin: EdgeInsets.all(160),
                 ),
                 Positioned(
                   top: 130,
                   child: Container(child: photoprofile()),
                 ),
                 Container(
+                  margin: const EdgeInsets.all(90),
                   child: camerapdp(),
-                  margin: EdgeInsets.all(90),
                 ),
               ],
             ),
             Card(
-              color: Color.fromARGB(255, 221, 217, 217),
+              color: const Color.fromARGB(255, 221, 217, 217),
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10)),
               child: Padding(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 child: Column(children: [
                   Row(
                     children: [
                       //Nampiasa TextField
 
-                      Text('nom: '),
+                      const Text('nom: '),
                       Text('${namectrl.text}' ' ' 'et  '),
-                      Text('prénom: '),
-                      Text('${surnamectrl.text}'),
+                      const Text('prénom: '),
+                      Text(surnamectrl.text),
                     ],
                   ),
 
@@ -298,8 +299,8 @@ class _interactivePage extends State<interactivePage> {
 
                   Row(
                     children: [
-                      Text('Sexe: '),
-                      Text('${valeurs}'),
+                      const Text('Sexe: '),
+                      Text('$valeurs'),
                     ],
                   ),
 
@@ -307,8 +308,8 @@ class _interactivePage extends State<interactivePage> {
 
                   Row(
                     children: [
-                      Text('Taille: '),
-                      Text('${currentvalue}' 'cm'),
+                      const Text('Taille: '),
+                      Text('$currentvalue' 'cm'),
                     ],
                   ),
 
@@ -316,7 +317,7 @@ class _interactivePage extends State<interactivePage> {
 
                   Row(
                     children: [
-                      Text('Age : '),
+                      const Text('Age : '),
                       Text(myAge),
                     ],
                   ),
@@ -325,21 +326,21 @@ class _interactivePage extends State<interactivePage> {
                   //Techno
                   Row(
                     children: [
-                      Text('Liste des Technologies : '),
+                      const Text('Liste des Technologies : '),
 
                       //Mi-afficher zavatra maromaro
 
                       Visibility(
-                        child: Text('flutter , '),
                         visible: isCheckedflutter ?? false,
+                        child: const Text('flutter , '),
                       ),
                       Visibility(
-                        child: Text('React , '),
                         visible: isCheckedreact ?? false,
+                        child: const Text('React , '),
                       ),
                       Visibility(
-                        child: Text('Symfony  '),
                         visible: isCheckedsymfony ?? false,
+                        child: const Text('Symfony  '),
                       ),
                     ],
                   ),
@@ -347,58 +348,59 @@ class _interactivePage extends State<interactivePage> {
                   //Mi_afficher ny loisir
                   Row(
                     children: [
-                      Text('Loisir: '),
-                      Text('${loisirctrl.text}'),
+                      const Text('Loisir: '),
+                      Text(loisirctrl.text),
                     ],
                   ),
 
                   //Mi_afficher ny BMI
                   Row(
                     children: [
-                      Text('BMI : '),
+                      const Text('BMI : '),
                       Text(result),
                     ],
                   ),
                 ]),
               ),
             ),
-            Divider(
+            const Divider(
               color: Color.fromARGB(255, 186, 65, 65),
             ),
             Card(
-                color: Color.fromARGB(255, 221, 217, 217),
+                color: const Color.fromARGB(255, 221, 217, 217),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(32)),
                 child: Padding(
-                  padding: EdgeInsets.all(12),
+                  padding: const EdgeInsets.all(12),
                   child: Column(children: [
                     Row(
                       children: [
-                        Text('Nom :  '),
+                        const Text('Nom :  '),
                         SizedBox(
                           width: 200,
                           child: TextField(
                             controller: namectrl,
-                            decoration: InputDecoration(hintText: 'nom'),
+                            decoration: const InputDecoration(hintText: 'nom'),
                           ),
                         ),
                       ],
                     ),
                     Row(
                       children: [
-                        Text('Prenom :  '),
+                        const Text('Prenom :  '),
                         SizedBox(
                           width: 200,
                           child: TextField(
                             controller: surnamectrl,
-                            decoration: InputDecoration(hintText: 'prenom'),
+                            decoration:
+                                const InputDecoration(hintText: 'prenom'),
                           ),
                         ),
                       ],
                     ),
                     Row(
                       children: [
-                        Text("Sexe : "),
+                        const Text("Sexe : "),
                         Row(
                           children: [
                             Radio(
@@ -410,10 +412,10 @@ class _interactivePage extends State<interactivePage> {
                                 });
                               },
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10.0,
                             ),
-                            Text("Masculin"),
+                            const Text("Masculin"),
                           ],
                         ),
                         Row(
@@ -427,17 +429,17 @@ class _interactivePage extends State<interactivePage> {
                                 });
                               },
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10.0,
                             ),
-                            Text("Feminin"),
+                            const Text("Feminin"),
                           ],
                         ),
                       ],
                     ),
                     Row(
                       children: [
-                        Text('Taille : '),
+                        const Text('Taille : '),
                         //  Text(currentvalue.toString(), style: TextStyle(fontSize: 35),),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -463,22 +465,23 @@ class _interactivePage extends State<interactivePage> {
                     ),
                     Row(
                       children: [
-                        Text('Poids :  '),
+                        const Text('Poids :  '),
                         SizedBox(
                           width: 200,
                           child: TextField(
                             controller: poidsctrl,
-                            decoration: InputDecoration(hintText: 'Poids'),
+                            decoration:
+                                const InputDecoration(hintText: 'Poids'),
                           ),
                         ),
                       ],
                     ),
                     Row(
                       children: [
-                        Text('Technologie : '),
+                        const Text('Technologie : '),
                         Row(
                           children: [
-                            Text('Flutter'),
+                            const Text('Flutter'),
                             Checkbox(
                                 value: isCheckedflutter,
                                 activeColor: Colors.black,
@@ -491,7 +494,7 @@ class _interactivePage extends State<interactivePage> {
                         ),
                         Row(
                           children: [
-                            Text('React'),
+                            const Text('React'),
                             Checkbox(
                                 value: isCheckedreact,
                                 activeColor: Colors.black,
@@ -504,7 +507,7 @@ class _interactivePage extends State<interactivePage> {
                         ),
                         Row(
                           children: [
-                            Text('Symfony'),
+                            const Text('Symfony'),
                             Checkbox(
                                 value: isCheckedsymfony,
                                 activeColor: Colors.blueGrey,
@@ -519,7 +522,7 @@ class _interactivePage extends State<interactivePage> {
                     ),
                     Row(
                       children: [
-                        Text('DDN: '),
+                        const Text('DDN: '),
 
                         ElevatedButton(
                           onPressed: () => pickDob(),
@@ -528,18 +531,19 @@ class _interactivePage extends State<interactivePage> {
                         // Text(dateTime.year.toString(),style: TextStyle(fontSize: 15),),
                         Text(
                           dateTime.toString(),
-                          style: TextStyle(fontSize: 15),
+                          style: const TextStyle(fontSize: 15),
                         ),
                       ],
                     ),
                     Row(
                       children: [
-                        Text('Loisirs :  '),
+                        const Text('Loisirs :  '),
                         SizedBox(
                           width: 200,
                           child: TextField(
                             controller: loisirctrl,
-                            decoration: InputDecoration(hintText: 'Loisirs'),
+                            decoration:
+                                const InputDecoration(hintText: 'Loisirs'),
                           ),
                         ),
                       ],
